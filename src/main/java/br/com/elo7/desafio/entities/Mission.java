@@ -109,24 +109,23 @@ public class Mission implements Serializable {
 	 * Move left - Increase array / Move rigth - Decrease array
 	 */
 	public void turn(TurnEnums turn) {
-		final DirectionEnums[] POINTINGS = DirectionEnums.values();
-		final int initialPosition = 0;
-		final int finalPosition = POINTINGS.length;
+		final int initialPosition = 1;
+		final int finalPosition = DirectionEnums.values().length;
 		if (turn.equals(TurnEnums.LEFT)) {
 			int newCode = this.getShipPointing().getCode() + 1;
 
-			if (finalPosition == newCode) {
+			if (newCode > finalPosition) {
 				this.setShipPointing(DirectionEnums.valueOf(initialPosition));
 			} else {
-				this.setShipPointing(DirectionEnums.valueOf(this.getShipPointing().getCode() + 1));
+				this.setShipPointing(DirectionEnums.valueOf(newCode));
 			}
 		} else {
 			int newCode = this.getShipPointing().getCode() - 1;
 
-			if (initialPosition == newCode) {
+			if (newCode < initialPosition) {
 				this.setShipPointing(DirectionEnums.valueOf(finalPosition));
 			} else {
-				this.setShipPointing(DirectionEnums.valueOf(this.getShipPointing().getCode() - 1));
+				this.setShipPointing(DirectionEnums.valueOf(newCode));
 			}
 		}
 	}
