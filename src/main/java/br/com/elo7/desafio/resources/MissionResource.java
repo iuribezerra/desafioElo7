@@ -24,7 +24,7 @@ public class MissionResource {
 	private MissionService missionService;
 
 	@PostMapping
-	public ResponseEntity<Mission> saveOrUpdate(@RequestBody MissionRequest missionRequest) {
+	public ResponseEntity<Mission> saveOrUpdate(@RequestBody MissionRequest missionRequest) throws Exception {
 		Mission mission = missionService.save(missionRequest);
 		return ResponseEntity.ok().body(mission);
 	}
@@ -42,7 +42,7 @@ public class MissionResource {
 	}
 
 	@PostMapping(value = "/commands")
-	public ResponseEntity<Mission> findById(@RequestBody CommandsRequest commands) {
+	public ResponseEntity<Mission> findById(@RequestBody CommandsRequest commands) throws Exception {
 		Mission mission = missionService.moveShip(commands);
 		return ResponseEntity.ok().body(mission);
 	}
