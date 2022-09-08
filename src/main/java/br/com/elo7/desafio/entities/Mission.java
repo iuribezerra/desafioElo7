@@ -48,6 +48,10 @@ public class Mission implements Serializable {
 		this.shipPointing = shipPointing;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 	public Planet getPlanet() {
 		return planet;
 	}
