@@ -27,4 +27,20 @@ public enum DirectionEnums {
 		throw new IllegalArgumentException("Invalid code for Direction");
 	}
 
+	public static DirectionEnums valueByName(String name) {
+		switch (name.toUpperCase()) {
+		case "NORTH":
+			return NORTH;
+		case "WEST":
+			return WEST;
+		case "SOUTH":
+			return SOUTH;
+		case "EAST":
+			return EAST;
+		default:
+			throw new IllegalArgumentException("Invalid code for Direction");
+		}
+
+	}
+
 }

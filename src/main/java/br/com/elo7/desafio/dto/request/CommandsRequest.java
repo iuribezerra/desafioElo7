@@ -1,6 +1,6 @@
 package br.com.elo7.desafio.dto.request;
 
-public class Commands {
+public class CommandsRequest {
 
 	String movements = "";
 	Long missionId;

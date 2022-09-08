@@ -39,8 +39,9 @@ public class Mission implements Serializable {
 
 	}
 
-	public Mission(Planet planet, Ship ship, Integer shipPositionX, Integer shipPositionY,
+	public Mission(Long id, Planet planet, Ship ship, Integer shipPositionX, Integer shipPositionY,
 			DirectionEnums shipPointing) {
+		this.id = id;
 		this.planet = planet;
 		this.ship = ship;
 		this.shipPositionX = shipPositionX;
