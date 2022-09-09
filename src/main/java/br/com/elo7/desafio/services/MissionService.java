@@ -12,6 +12,9 @@ import br.com.elo7.desafio.entities.Mission;
 import br.com.elo7.desafio.entities.Planet;
 import br.com.elo7.desafio.entities.Ship;
 import br.com.elo7.desafio.enums.TurnEnums;
+import br.com.elo7.desafio.exceptions.OccupiedLocationException;
+import br.com.elo7.desafio.exceptions.OutRangeException;
+import br.com.elo7.desafio.exceptions.ShipInMissionException;
 import br.com.elo7.desafio.repositories.MissionRepository;
 
 @Service
@@ -58,12 +61,11 @@ public class MissionService {
 		List<Mission> missions = findByPlanet(mission.getPlanet().getId());
 		// Ship is not used
 		if (existsByShip(mission.getShip())) {
-			throw new Exception("ship is already on mission.");
+			throw new ShipInMissionException();
 		}
 
 		// Validate location of X and Y
-		isMoveIntoPlanet(mission);
-		isLocationEmpty(mission, missions);
+		canMoveShip(mission, missions);
 
 		return save(mission);
 	}
@@ -88,37 +90,37 @@ public class MissionService {
 		return this.save(mission);
 	}
 
-	private void canMoveShip(Mission mission, List<Mission> missions) throws Exception {
-		isMoveIntoPlanet(mission);
+	public void canMoveShip(Mission mission, List<Mission> missions) throws Exception {
+		canMoveIntoPlanet(mission);
 		isLocationEmpty(mission, missions);
 	}
 
-	private boolean isMoveIntoPlanet(Mission mission) throws Exception {
+	public boolean canMoveIntoPlanet(Mission mission) throws Exception {
 		int minWidth = mission.getPlanet().getWidth() * -1;
 		int maxWidth = mission.getPlanet().getWidth();
 		int minHeight = mission.getPlanet().getHeight() * -1;
 		int maxHeigh = mission.getPlanet().getHeight();
 
 		if (mission.getShipPositionX() < minWidth || mission.getShipPositionX() > maxWidth) {
-			throw new Exception("Movement deny, out of planet range. X-AXIS.");
+			throw new OutRangeException("Movement deny, out of planet range. X-AXIS.");
 		}
 
 		if (mission.getShipPositionY() < minHeight || mission.getShipPositionY() > maxHeigh) {
-			throw new Exception("Movement deny, out of planet range. Y-AXIS");
+			throw new OutRangeException("Movement deny, out of planet range. Y-AXIS");
 		}
 
 		return true;
 	}
 
-	private boolean isLocationEmpty(Mission mission, List<Mission> missions) throws Exception {
+	public boolean isLocationEmpty(Mission mission, List<Mission> missions) throws Exception {
 		Mission diferentMission = missions.stream()
 				.filter(item -> !item.getId().equals(mission.getId())
 						&& item.getShipPositionX().equals(mission.getShipPositionX())
 						&& item.getShipPositionY().equals(mission.getShipPositionY()))
 				.findFirst().orElse(null);
-
+		
 		if (diferentMission != null) {
-			throw new Exception("Movement deny, blocked way.");
+			throw new OccupiedLocationException();
 		}
 		return true;
 	}

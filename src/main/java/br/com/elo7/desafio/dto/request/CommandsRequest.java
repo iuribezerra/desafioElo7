@@ -6,6 +6,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import br.com.elo7.desafio.exceptions.InvalidCommandException;
+
 public class CommandsRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -25,11 +27,14 @@ public class CommandsRequest implements Serializable {
 	 * expected L-left, R-right, M-move
 	 */
 	public String[] getMovements() {
-		String movements = this.movements.replaceAll("[^Ll Rr Mm ]", "");
-		if (movements.length() > 0) {
-			return movements.split("");
+		// Remove blank space
+		this.movements = this.movements.replaceAll("\\s", "");
+
+		if (this.movements.replaceAll("[Ll Rr Mm]", "").length() > 0) {
+			throw new InvalidCommandException();
 		}
-		return new String[0];
+
+		return movements.split("");
 	}
 
 }
