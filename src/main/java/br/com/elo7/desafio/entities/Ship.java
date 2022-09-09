@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.elo7.desafio.dto.request.ShipRequest;
+
 @Entity
 @Table(name = "TB_SHIP")
 public class Ship implements Serializable {
@@ -26,6 +28,10 @@ public class Ship implements Serializable {
 
 	public Ship(String name) {
 		this.name = name;
+	}
+	
+	public Ship(ShipRequest shipRequest) {
+		this.name = shipRequest.getName();
 	}
 
 	public Long getId() {

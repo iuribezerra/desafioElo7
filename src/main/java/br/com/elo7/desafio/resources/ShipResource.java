@@ -2,6 +2,8 @@ package br.com.elo7.desafio.resources;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.elo7.desafio.dto.request.ShipRequest;
 import br.com.elo7.desafio.entities.Ship;
 import br.com.elo7.desafio.services.ShipService;
 
@@ -22,8 +25,8 @@ public class ShipResource {
 	private ShipService shipService;
 
 	@PostMapping
-	public ResponseEntity<Ship> saveOrUpdate(@RequestBody Ship shipRequest) {
-		Ship ships = shipService.save(shipRequest);
+	public ResponseEntity<Ship> saveOrUpdate(@Valid @RequestBody ShipRequest shipRequest) {
+		Ship ships = shipService.save(new Ship(shipRequest));
 		return ResponseEntity.ok().body(ships);
 	}
 

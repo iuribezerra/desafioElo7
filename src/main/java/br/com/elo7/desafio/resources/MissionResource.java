@@ -2,6 +2,8 @@ package br.com.elo7.desafio.resources;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,7 @@ public class MissionResource {
 	private MissionService missionService;
 
 	@PostMapping
-	public ResponseEntity<Mission> saveOrUpdate(@RequestBody MissionRequest missionRequest) throws Exception {
+	public ResponseEntity<Mission> saveOrUpdate(@Valid @RequestBody MissionRequest missionRequest) throws Exception {
 		Mission mission = missionService.save(missionRequest);
 		return ResponseEntity.ok().body(mission);
 	}
@@ -42,7 +44,7 @@ public class MissionResource {
 	}
 
 	@PostMapping(value = "/commands")
-	public ResponseEntity<Mission> findById(@RequestBody CommandsRequest commands) throws Exception {
+	public ResponseEntity<Mission> findById(@Valid @RequestBody CommandsRequest commands) throws Exception {
 		Mission mission = missionService.moveShip(commands);
 		return ResponseEntity.ok().body(mission);
 	}

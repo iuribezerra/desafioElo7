@@ -1,19 +1,34 @@
 package br.com.elo7.desafio.dto.request;
 
+import java.io.Serializable;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import br.com.elo7.desafio.enums.DirectionEnums;
 
-public class MissionRequest {
+public class MissionRequest implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 
+	@NotNull
+	@Min(value = 0, message = "Invalid planet id")
 	private Long planetId;
 
+	@NotNull
+	@Min(value = 0, message = "Invalid ship id")
 	private Long shipId;
 
+	@NotNull
 	private Integer shipPositionX;
 
+	@NotNull
 	private Integer shipPositionY;
 
+	@NotBlank
 	private String shipPointing;
 
 	public Long getId() {

@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.elo7.desafio.dto.request.PlanetRequest;
+
 @Entity
 @Table(name = "TB_PLANET")
 public class Planet implements Serializable {
@@ -32,6 +34,12 @@ public class Planet implements Serializable {
 		this.name = name;
 		this.width = width;
 		this.height = height;
+	}
+
+	public Planet(PlanetRequest planetRequest) {
+		this.name = planetRequest.getName();
+		this.width = planetRequest.getWidth();
+		this.height = planetRequest.getHeight();
 	}
 
 	public Long getId() {

@@ -1,8 +1,20 @@
 package br.com.elo7.desafio.dto.request;
 
-public class CommandsRequest {
+import java.io.Serializable;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+public class CommandsRequest implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@NotBlank
 	String movements = "";
+
+	@NotNull
+	@Min(value = 0, message = "Invalid mission id")
 	Long missionId;
 
 	public Long getMissionId() {
