@@ -72,7 +72,7 @@ public class MissionService {
 		Mission mission = this.findById(commands.getMissionId());
 		List<Mission> missions = findByPlanet(mission.getPlanet().getId());
 
-		for (String move : commands.getMovements()) {
+		for (String move : commands.getMovements().split("")) {
 			if (move.equalsIgnoreCase("M")) {
 				mission.moveShip();
 				canMoveShip(mission, missions);

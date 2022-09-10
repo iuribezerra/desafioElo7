@@ -27,19 +27,11 @@ public class CommandsRequest implements Serializable {
 	public void setMovements(String movements) {
 		this.movements = movements;
 	}
-
-	public void setMissionId(Long missionId) {
-		this.missionId = missionId;
-	}
-
-	public Long getMissionId() {
-		return missionId;
-	}
-
+	
 	/*
 	 * expected L-left, R-right, M-move
 	 */
-	public String[] getMovements() {
+	public String getMovements() {
 		// Remove blank space
 		this.movements = this.movements.replaceAll("\\s", "");
 
@@ -47,7 +39,15 @@ public class CommandsRequest implements Serializable {
 			throw new BusinessException("Use only L for turn Left, R for turn Right or M to Move");
 		}
 
-		return movements.split("");
+		return movements;
+	}
+
+	public void setMissionId(Long missionId) {
+		this.missionId = missionId;
+	}
+
+	public Long getMissionId() {
+		return missionId;
 	}
 
 }
