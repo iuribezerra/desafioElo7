@@ -16,6 +16,9 @@ public class ShipService {
 	ShipRepository shipRepository;
 
 	public Ship save(Ship ship) {
+		if (ship.getId() != null) {
+			this.findById(ship.getId());
+		}
 		return shipRepository.save(ship);
 	}
 

@@ -12,8 +12,6 @@ public class MissionRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
-
 	@NotNull
 	@Min(value = 0, message = "Invalid planet id")
 	private Long planetId;
@@ -31,22 +29,13 @@ public class MissionRequest implements Serializable {
 	@NotBlank
 	private String shipPointing;
 
-	public MissionRequest(Long id, Long planetId, Long shipId, Integer shipPositionX, Integer shipPositionY,
+	public MissionRequest(Long planetId, Long shipId, Integer shipPositionX, Integer shipPositionY,
 			String shipPointing) {
-		this.id = id;
 		this.planetId = planetId;
 		this.shipId = shipId;
 		this.shipPositionX = shipPositionX;
 		this.shipPositionY = shipPositionY;
 		this.shipPointing = shipPointing;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Long getPlanetId() {

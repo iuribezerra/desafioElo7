@@ -32,6 +32,7 @@ public class Ship implements Serializable {
 	}
 	
 	public Ship(ShipRequest shipRequest) {
+		this.id = shipRequest.getId();
 		this.name = shipRequest.getName();
 	}
 

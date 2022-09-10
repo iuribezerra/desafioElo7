@@ -16,6 +16,9 @@ public class PlanetService {
 	PlanetRepository planetRepository;
 
 	public Planet save(Planet planet) {
+		if (planet.getId() != null) {
+			this.findById(planet.getId());
+		}
 		return planetRepository.save(planet);
 	}
 

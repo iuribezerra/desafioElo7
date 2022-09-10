@@ -38,6 +38,7 @@ public class Planet implements Serializable {
 	}
 
 	public Planet(PlanetRequest planetRequest) {
+		this.id = planetRequest.getId();
 		this.name = planetRequest.getName();
 		this.width = planetRequest.getWidth();
 		this.height = planetRequest.getHeight();

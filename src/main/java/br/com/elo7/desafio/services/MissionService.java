@@ -53,7 +53,7 @@ public class MissionService {
 		Planet planet = planetService.findById(missionRequest.getPlanetId());
 		Ship ship = shipService.findById(missionRequest.getShipId());
 
-		Mission mission = new Mission(missionRequest.getId(), planet, ship, missionRequest.getShipPositionX(),
+		Mission mission = new Mission(null, planet, ship, missionRequest.getShipPositionX(),
 				missionRequest.getShipPositionY(), missionRequest.getShipPointing());
 
 		List<Mission> missions = findByPlanet(mission.getPlanet().getId());

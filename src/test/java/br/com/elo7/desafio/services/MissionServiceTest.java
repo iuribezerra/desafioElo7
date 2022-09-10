@@ -57,7 +57,7 @@ class MissionServiceTest {
 		Mockito.when(planetRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(planet));
 		Mockito.when(shipRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ship));
 
-		MissionRequest missionRequest = new MissionRequest(null, 2L, 1L, 1, 2, "NORTH");
+		MissionRequest missionRequest = new MissionRequest(2L, 1L, 1, 2, "NORTH");
 		assertDoesNotThrow(() -> missionService.save(missionRequest));
 	}
 
@@ -75,7 +75,7 @@ class MissionServiceTest {
 		Mockito.when(missionRepository.findByPlanet(Mockito.any())).thenReturn(missions);
 		Mockito.when(missionRepository.existsByShip(Mockito.any())).thenReturn(true);
 
-		MissionRequest missionRequest = new MissionRequest(null, 2L, 1L, 1, 2, "NORTH");
+		MissionRequest missionRequest = new MissionRequest(2L, 1L, 1, 2, "NORTH");
 		assertThrows(BusinessException.class, () -> missionService.save(missionRequest));
 	}
 
