@@ -26,7 +26,8 @@ public class Ship implements Serializable {
 
 	}
 
-	public Ship(String name) {
+	public Ship(Long id, String name) {
+		this.id = id;
 		this.name = name;
 	}
 	
@@ -38,6 +39,10 @@ public class Ship implements Serializable {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public String getName() {
 		return name;
 	}

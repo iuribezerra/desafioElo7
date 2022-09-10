@@ -19,6 +19,19 @@ public class CommandsRequest implements Serializable {
 	@Min(value = 0, message = "Invalid mission id")
 	Long missionId;
 
+	public CommandsRequest(String movements, Long missionId) {
+		this.movements = movements;
+		this.missionId = missionId;
+	}
+
+	public void setMovements(String movements) {
+		this.movements = movements;
+	}
+
+	public void setMissionId(Long missionId) {
+		this.missionId = missionId;
+	}
+
 	public Long getMissionId() {
 		return missionId;
 	}

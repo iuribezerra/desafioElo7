@@ -31,6 +31,16 @@ public class MissionRequest implements Serializable {
 	@NotBlank
 	private String shipPointing;
 
+	public MissionRequest(Long id, Long planetId, Long shipId, Integer shipPositionX, Integer shipPositionY,
+			String shipPointing) {
+		this.id = id;
+		this.planetId = planetId;
+		this.shipId = shipId;
+		this.shipPositionX = shipPositionX;
+		this.shipPositionY = shipPositionY;
+		this.shipPointing = shipPointing;
+	}
+
 	public Long getId() {
 		return id;
 	}
