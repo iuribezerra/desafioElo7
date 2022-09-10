@@ -22,9 +22,7 @@ import br.com.elo7.desafio.entities.Mission;
 import br.com.elo7.desafio.entities.Planet;
 import br.com.elo7.desafio.entities.Ship;
 import br.com.elo7.desafio.enums.DirectionEnums;
-import br.com.elo7.desafio.exceptions.OccupiedLocationException;
-import br.com.elo7.desafio.exceptions.OutRangeException;
-import br.com.elo7.desafio.exceptions.ShipInMissionException;
+import br.com.elo7.desafio.exceptions.BusinessException;
 import br.com.elo7.desafio.repositories.MissionRepository;
 import br.com.elo7.desafio.repositories.PlanetRepository;
 import br.com.elo7.desafio.repositories.ShipRepository;
@@ -78,7 +76,7 @@ class MissionServiceTest {
 		Mockito.when(missionRepository.existsByShip(Mockito.any())).thenReturn(true);
 
 		MissionRequest missionRequest = new MissionRequest(null, 2L, 1L, 1, 2, "NORTH");
-		assertThrows(ShipInMissionException.class, () -> missionService.save(missionRequest));
+		assertThrows(BusinessException.class, () -> missionService.save(missionRequest));
 	}
 
 	@Test
@@ -125,7 +123,7 @@ class MissionServiceTest {
 		Planet planet = new Planet(2L, "Marte", 5, 5);
 		Mission mission = new Mission(3L, planet, ship, 6, 2, DirectionEnums.NORTH);
 
-		assertThrows(OutRangeException.class, () -> {
+		assertThrows(BusinessException.class, () -> {
 			this.missionService.canMoveIntoPlanet(mission);
 		});
 
@@ -134,7 +132,7 @@ class MissionServiceTest {
 		Planet planet2 = new Planet(5L, "Marte", 5, 5);
 		Mission mission2 = new Mission(6L, planet2, ship2, 5, -6, DirectionEnums.NORTH);
 
-		assertThrows(OutRangeException.class, () -> {
+		assertThrows(BusinessException.class, () -> {
 			this.missionService.canMoveIntoPlanet(mission2);
 		});
 	}
@@ -176,7 +174,7 @@ class MissionServiceTest {
 
 		// Expected exception for same position of mission 1
 		List<Mission> missions = Arrays.asList(mission, mission2);
-		assertThrows(OccupiedLocationException.class, () -> {
+		assertThrows(BusinessException.class, () -> {
 			this.missionService.isLocationEmpty(mission2, missions);
 		});
 	}

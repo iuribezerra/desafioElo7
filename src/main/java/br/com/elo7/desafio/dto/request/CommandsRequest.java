@@ -6,7 +6,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import br.com.elo7.desafio.exceptions.InvalidCommandException;
+import br.com.elo7.desafio.exceptions.BusinessException;
 
 public class CommandsRequest implements Serializable {
 
@@ -44,7 +44,7 @@ public class CommandsRequest implements Serializable {
 		this.movements = this.movements.replaceAll("\\s", "");
 
 		if (this.movements.replaceAll("[Ll Rr Mm]", "").length() > 0) {
-			throw new InvalidCommandException();
+			throw new BusinessException("Use only L for turn Left, R for turn Right or M to Move");
 		}
 
 		return movements.split("");

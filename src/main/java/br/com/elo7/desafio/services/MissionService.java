@@ -12,9 +12,7 @@ import br.com.elo7.desafio.entities.Mission;
 import br.com.elo7.desafio.entities.Planet;
 import br.com.elo7.desafio.entities.Ship;
 import br.com.elo7.desafio.enums.TurnEnums;
-import br.com.elo7.desafio.exceptions.OccupiedLocationException;
-import br.com.elo7.desafio.exceptions.OutRangeException;
-import br.com.elo7.desafio.exceptions.ShipInMissionException;
+import br.com.elo7.desafio.exceptions.BusinessException;
 import br.com.elo7.desafio.repositories.MissionRepository;
 
 @Service
@@ -61,7 +59,7 @@ public class MissionService {
 		List<Mission> missions = findByPlanet(mission.getPlanet().getId());
 		// Ship is not used
 		if (existsByShip(mission.getShip())) {
-			throw new ShipInMissionException();
+			throw new BusinessException("Ship is already on mission");
 		}
 
 		// Validate location of X and Y
@@ -102,11 +100,11 @@ public class MissionService {
 		int maxHeigh = mission.getPlanet().getHeight();
 
 		if (mission.getShipPositionX() < minWidth || mission.getShipPositionX() > maxWidth) {
-			throw new OutRangeException("Movement deny, out of planet range. X-AXIS.");
+			throw new BusinessException("Movement deny, out of planet range. X-AXIS.");
 		}
 
 		if (mission.getShipPositionY() < minHeight || mission.getShipPositionY() > maxHeigh) {
-			throw new OutRangeException("Movement deny, out of planet range. Y-AXIS");
+			throw new BusinessException("Movement deny, out of planet range. Y-AXIS");
 		}
 
 		return true;
@@ -118,9 +116,9 @@ public class MissionService {
 						&& item.getShipPositionX().equals(mission.getShipPositionX())
 						&& item.getShipPositionY().equals(mission.getShipPositionY()))
 				.findFirst().orElse(null);
-		
+
 		if (diferentMission != null) {
-			throw new OccupiedLocationException();
+			throw new BusinessException("Movement deny, blocked way");
 		}
 		return true;
 	}

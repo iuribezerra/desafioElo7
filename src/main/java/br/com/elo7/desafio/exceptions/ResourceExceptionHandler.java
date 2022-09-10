@@ -33,30 +33,8 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(standardError.getStatus()).body(standardError);
 	}
 
-	@ExceptionHandler(OccupiedLocationException.class)
-	public ResponseEntity<StandardError> occupiedLocationException(OccupiedLocationException e,
-			HttpServletRequest request) {
-		StandardError standardError = new StandardError(HttpStatus.BAD_REQUEST, "Invalid request",
-				request.getRequestURI(), e.getMessage());
-		return ResponseEntity.status(standardError.getStatus()).body(standardError);
-	}
-
-	@ExceptionHandler(OutRangeException.class)
-	public ResponseEntity<StandardError> outRangeException(OutRangeException e, HttpServletRequest request) {
-		StandardError standardError = new StandardError(HttpStatus.BAD_REQUEST, "Invalid request",
-				request.getRequestURI(), e.getMessage());
-		return ResponseEntity.status(standardError.getStatus()).body(standardError);
-	}
-	
-	@ExceptionHandler(InvalidCommandException.class)
-	public ResponseEntity<StandardError> invalidCommandException(InvalidCommandException e, HttpServletRequest request) {
-		StandardError standardError = new StandardError(HttpStatus.BAD_REQUEST, "Invalid request",
-				request.getRequestURI(), e.getMessage());
-		return ResponseEntity.status(standardError.getStatus()).body(standardError);
-	}
-	
-	@ExceptionHandler(ShipInMissionException.class)
-	public ResponseEntity<StandardError> invalidCommandException(ShipInMissionException e, HttpServletRequest request) {
+	@ExceptionHandler(BusinessException.class)
+	public ResponseEntity<StandardError> invalidCommandException(BusinessException e, HttpServletRequest request) {
 		StandardError standardError = new StandardError(HttpStatus.BAD_REQUEST, "Invalid request",
 				request.getRequestURI(), e.getMessage());
 		return ResponseEntity.status(standardError.getStatus()).body(standardError);
