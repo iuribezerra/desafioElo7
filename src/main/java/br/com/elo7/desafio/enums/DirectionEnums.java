@@ -1,5 +1,7 @@
 package br.com.elo7.desafio.enums;
 
+import br.com.elo7.desafio.exceptions.BusinessException;
+
 public enum DirectionEnums {
 
 	/**
@@ -38,7 +40,7 @@ public enum DirectionEnums {
 		case "EAST":
 			return EAST;
 		default:
-			throw new IllegalArgumentException("Invalid code for Direction");
+			throw new BusinessException("Invalid value for Direction");
 		}
 
 	}

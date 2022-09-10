@@ -1,5 +1,7 @@
 package br.com.elo7.desafio.enums;
 
+import br.com.elo7.desafio.exceptions.BusinessException;
+
 public enum TurnEnums {
 
 	LEFT(1), RIGHT(2);
@@ -21,7 +23,7 @@ public enum TurnEnums {
 			}
 		}
 
-		throw new IllegalArgumentException("Invalid code");
+		throw new BusinessException("Invalid value for Turn");
 	}
 
 }
