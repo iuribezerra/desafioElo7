@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -25,8 +27,12 @@ public class Mission implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@OneToOne
+	@JoinColumn(name="planet_id", nullable = false)
 	private Planet planet;
 
+	@OneToOne
+	@JoinColumn(name="ship_id", nullable = false)
 	private Ship ship;
 
 	private Integer shipPositionX;

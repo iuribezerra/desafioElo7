@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.elo7.desafio.dto.request.ShipRequest;
@@ -21,6 +22,9 @@ public class Ship implements Serializable {
 	private Long id;
 
 	private String name;
+
+	@OneToOne(mappedBy = "ship")
+	private Mission mission;
 
 	public Ship() {
 

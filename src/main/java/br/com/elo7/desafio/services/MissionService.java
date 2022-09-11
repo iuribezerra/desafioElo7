@@ -48,6 +48,10 @@ public class MissionService {
 	public Mission save(Mission mission) throws Exception {
 		return missionRepository.save(mission);
 	}
+	
+	public void delete(Long id) {
+		missionRepository.deleteById(id);
+	}
 
 	public Mission save(MissionRequest missionRequest) throws Exception {
 		Planet planet = planetService.findById(missionRequest.getPlanetId());

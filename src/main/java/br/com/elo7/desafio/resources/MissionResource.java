@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +35,13 @@ public class MissionResource {
 	public ResponseEntity<Mission> saveOrUpdate(@Valid @RequestBody MissionRequest missionRequest) throws Exception {
 		Mission mission = missionService.save(missionRequest);
 		return ResponseEntity.ok().body(mission);
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	@Operation(summary = "Delete", description = "Delete mission by id")
+	public ResponseEntity<Void> delete(@PathVariable Long id) throws Exception {
+		missionService.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 
 	@GetMapping

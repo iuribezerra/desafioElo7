@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.elo7.desafio.dto.request.PlanetRequest;
@@ -25,6 +26,9 @@ public class Planet implements Serializable {
 	private Integer width;
 
 	private Integer height;
+	
+	@OneToOne(mappedBy = "planet")
+	private Mission mission;
 
 	public Planet() {
 

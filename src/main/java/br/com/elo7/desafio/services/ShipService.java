@@ -21,6 +21,10 @@ public class ShipService {
 		}
 		return shipRepository.save(ship);
 	}
+	
+	public void delete(Long id) {
+		shipRepository.deleteById(id);
+	}
 
 	public Ship findById(Long id) {
 		Optional<Ship> ship = shipRepository.findById(id);

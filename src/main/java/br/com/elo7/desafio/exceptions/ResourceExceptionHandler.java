@@ -4,6 +4,8 @@ import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,6 +18,21 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(NoSuchElementException.class)
 	public ResponseEntity<StandardError> entityNotFound(NoSuchElementException e, HttpServletRequest request) {
 		StandardError standardError = new StandardError(HttpStatus.NOT_FOUND, "Resource not found",
+				request.getRequestURI(), e.getMessage());
+		return ResponseEntity.status(standardError.getStatus()).body(standardError);
+	}
+	
+	@ExceptionHandler(EmptyResultDataAccessException.class)
+	public ResponseEntity<StandardError> emptyResultDataAccessException(EmptyResultDataAccessException e, HttpServletRequest request) {
+		StandardError standardError = new StandardError(HttpStatus.NOT_FOUND, "Resource not found",
+				request.getRequestURI(), e.getMessage());
+		return ResponseEntity.status(standardError.getStatus()).body(standardError);
+	}
+
+	
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException e, HttpServletRequest request) {
+		StandardError standardError = new StandardError(HttpStatus.BAD_REQUEST, "Constrain Violation",
 				request.getRequestURI(), e.getMessage());
 		return ResponseEntity.status(standardError.getStatus()).body(standardError);
 	}

@@ -21,6 +21,10 @@ public class PlanetService {
 		}
 		return planetRepository.save(planet);
 	}
+	
+	public void delete(Long id) {
+		planetRepository.deleteById(id);
+	}
 
 	public Planet findById(Long id) {
 		Optional<Planet> planet = planetRepository.findById(id);
