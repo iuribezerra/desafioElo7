@@ -1,12 +1,13 @@
 package br.com.elo7.desafio.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.elo7.desafio.dto.request.PlanetRequest;
@@ -27,8 +28,8 @@ public class Planet implements Serializable {
 
 	private Integer height;
 	
-	@OneToOne(mappedBy = "planet")
-	private Mission mission;
+	@OneToMany(mappedBy = "planet")
+	private List<Mission> mission;
 
 	public Planet() {
 
