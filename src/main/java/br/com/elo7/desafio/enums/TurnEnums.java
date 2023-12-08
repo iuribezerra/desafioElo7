@@ -4,26 +4,38 @@ import br.com.elo7.desafio.exceptions.BusinessException;
 
 public enum TurnEnums {
 
-	LEFT(1), RIGHT(2);
+	LEFT("L") {
+		@Override
+		public DirectionEnums newDirection(DirectionEnums directionEnums) {
+			return directionEnums.turnLeft();
+		}
+	}, RIGHT("R") {
+		@Override
+		public DirectionEnums newDirection(DirectionEnums directionEnums) {
+			return directionEnums.turnRight();
+		}
+	};
 
-	private int code;
+	private String firstLetter;
 
-	private TurnEnums(int code) {
-		this.code = code;
+	private TurnEnums(String firstLetter) {
+		this.firstLetter = firstLetter;
 	}
 
-	public int getCode() {
-		return code;
+	public String getFirstLetter() {
+		return firstLetter;
 	}
 
-	public static TurnEnums valueOf(int code) {
+	public static TurnEnums value(String firstLetter) {
 		for (TurnEnums value : TurnEnums.values()) {
-			if (value.getCode() == code) {
+			if (value.getFirstLetter().equalsIgnoreCase(firstLetter)) {
 				return value;
 			}
 		}
 
 		throw new BusinessException("Invalid value for Turn");
 	}
+
+	public abstract DirectionEnums newDirection(DirectionEnums directionEnums);
 
 }

@@ -117,29 +117,8 @@ public class Mission implements Serializable {
 		}
 	}
 
-	/*
-	 * Move left - Increase array / Move rigth - Decrease array
-	 */
 	public void turn(TurnEnums turn) {
-		final int initialPosition = 1;
-		final int finalPosition = DirectionEnums.values().length;
-		if (turn.equals(TurnEnums.LEFT)) {
-			int newCode = this.getShipPointing().getCode() + 1;
-
-			if (newCode > finalPosition) {
-				this.setShipPointing(DirectionEnums.valueOf(initialPosition));
-			} else {
-				this.setShipPointing(DirectionEnums.valueOf(newCode));
-			}
-		} else {
-			int newCode = this.getShipPointing().getCode() - 1;
-
-			if (newCode < initialPosition) {
-				this.setShipPointing(DirectionEnums.valueOf(finalPosition));
-			} else {
-				this.setShipPointing(DirectionEnums.valueOf(newCode));
-			}
-		}
+		this.setShipPointing(turn.newDirection(shipPointing));
 	}
 
 }

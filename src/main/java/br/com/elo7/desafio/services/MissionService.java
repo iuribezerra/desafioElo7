@@ -81,14 +81,10 @@ public class MissionService {
 				mission.moveShip();
 				canMoveShip(mission, missions);
 			} else {
-				if (move.equalsIgnoreCase("L")) {
-					mission.turn(TurnEnums.LEFT);
-				} else {
-					mission.turn(TurnEnums.RIGHT);
-				}
+				mission.turn(TurnEnums.value(move));
 			}
 		}
-		// Update ship status after loop
+		// Update ship status after loops
 		return this.save(mission);
 	}
 

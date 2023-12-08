@@ -4,45 +4,69 @@ import br.com.elo7.desafio.exceptions.BusinessException;
 
 public enum DirectionEnums {
 
-	/**
-	 * Enums are sorted in a circle, based on the wind rose diagram
-	 */
-	NORTH(1), WEST(2), SOUTH(3), EAST(4);
-
-	private int code;
-
-	private DirectionEnums(int code) {
-		this.code = code;
-	}
-
-	public int getCode() {
-		return code;
-	}
-
-	public static DirectionEnums valueOf(int code) {
-		for (DirectionEnums value : DirectionEnums.values()) {
-			if (value.getCode() == code) {
-				return value;
-			}
+	NORTH {
+		@Override
+		public DirectionEnums turnLeft() {
+			return WEST;
 		}
 
-		throw new IllegalArgumentException("Invalid code for Direction");
-	}
+		@Override
+		public DirectionEnums turnRight() {
+			return EAST;
+		}
+	},
+	WEST {
+		@Override
+		public DirectionEnums turnLeft() {
+			return SOUTH;
+		}
+
+		@Override
+		public DirectionEnums turnRight() {
+			return NORTH;
+		}
+	},
+	SOUTH {
+		@Override
+		public DirectionEnums turnLeft() {
+			return EAST;
+		}
+
+		@Override
+		public DirectionEnums turnRight() {
+			return WEST;
+		}
+	},
+	EAST {
+		@Override
+		public DirectionEnums turnLeft() {
+			return NORTH;
+		}
+
+		@Override
+		public DirectionEnums turnRight() {
+			return SOUTH;
+		}
+	};
 
 	public static DirectionEnums valueByName(String name) {
 		switch (name.toUpperCase()) {
-		case "NORTH":
-			return NORTH;
-		case "WEST":
-			return WEST;
-		case "SOUTH":
-			return SOUTH;
-		case "EAST":
-			return EAST;
-		default:
-			throw new BusinessException("Invalid value for Direction");
+			case "NORTH":
+				return NORTH;
+			case "WEST":
+				return WEST;
+			case "SOUTH":
+				return SOUTH;
+			case "EAST":
+				return EAST;
+			default:
+				throw new BusinessException("Invalid value for Direction");
 		}
 
 	}
+
+	public abstract DirectionEnums turnLeft();
+
+	public abstract DirectionEnums turnRight();
 
 }
